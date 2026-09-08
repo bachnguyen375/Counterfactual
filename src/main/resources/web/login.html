@@ -1,41 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Server - Login</title>
-  <link rel="stylesheet" href="/web/style.css">
+
+  <title>Motherboard Source Code</title>
+  <style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+
+        background: #000000;
+        color: #ffffff;
+
+        min-height: 100vh;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .login-container {
+        width: 380px;
+        padding: 40px;
+
+        background: #111111;
+
+        border: 1px solid #333333;
+        border-radius: 12px;
+
+        box-shadow: 0 10px 40px rgba(255, 255, 255, 0.08);
+    }
+
+    h1 {
+        margin: 0 0 10px 0;
+
+        text-align: center;
+        font-size: 32px;
+    }
+
+    .subtitle {
+        margin-bottom: 30px;
+
+        text-align: center;
+        color: #888888;
+
+        font-size: 14px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+
+        margin-bottom: 8px;
+
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    input {
+        width: 100%;
+
+        padding: 13px;
+
+        background: #1c1c1c;
+        color: #ffffff;
+
+        border: 1px solid #444444;
+        border-radius: 6px;
+
+        font-size: 15px;
+
+        outline: none;
+    }
+
+    input:focus {
+        border-color: #ffffff;
+    }
+
+    input::placeholder {
+        color: #666666;
+    }
+
+    button {
+        width: 100%;
+
+        padding: 13px;
+
+        margin-top: 10px;
+
+        background: #ffffff;
+        color: #000000;
+
+        border: none;
+        border-radius: 6px;
+
+        font-size: 15px;
+        font-weight: bold;
+
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #dddddd;
+    }
+
+    .footer {
+        margin-top: 25px;
+
+        text-align: center;
+
+        color: #555555;
+        font-size: 12px;
+    }
+  </style>
 </head>
 
 <body>
+
 <div class="login-container">
-  <h1>My Server</h1>
+
+  <h1>Intelligent Program</h1>
+
+  <div class="subtitle">
+    Sign in to continue
+  </div>
 
   <form method="POST" action="/login">
+
     <div class="form-group">
       <label for="username">Username</label>
+
       <input
           type="text"
           id="username"
           name="username"
           placeholder="Enter your username"
-          required
-      >
+          required>
     </div>
 
     <div class="form-group">
       <label for="password">Password</label>
+
       <input
           type="password"
           id="password"
           name="password"
           placeholder="Enter your password"
-          required
-      >
+          required>
     </div>
 
-    <button type="submit">Login</button>
+    <button type="submit">
+      Login
+    </button>
+
   </form>
+
+  <div class="footer">
+    International Council for Artificial Intelligence Security
+  </div>
+
 </div>
+
 </body>
 </html>
+
