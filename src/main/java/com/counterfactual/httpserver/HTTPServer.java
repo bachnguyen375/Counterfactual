@@ -2,48 +2,29 @@ package com.counterfactual.httpserver;
 
 import com.counterfactual.httpserver.config.Configuration;
 import com.counterfactual.httpserver.config.ConfigurationManager;
+import com.counterfactual.httpserver.core.ServerListenerThread;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.ServerSocket;
-import java.net.Socket;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class HTTPServer {
+  private final static Logger LOGGER = LoggerFactory.getLogger(HTTPServer.class);
+
   public static void main(String[] args){
-    System.out.println("HelloWorld");
+    LOGGER.info("Hello World");
 
     ConfigurationManager.getInstance().loadConfigurationFile("src/main/resources/http.json");
     Configuration config = ConfigurationManager.getInstance().getCurrentConfiguration();
 
-    System.out.println("Port:" + config.getPort());
-    System.out.println("Webroot:" + config.getWebroot());
+    LOGGER.info("Port:" + config.getPort());
+    LOGGER.info("Webroot:" + config.getWebroot());
 
+    ServerListenerThread listenerThread = null;
     try {
-      ServerSocket serverSocket = new ServerSocket(config.getPort());
-      Socket socket = serverSocket.accept();
-
-      InputStream inputStream = socket.getInputStream();
-      OutputStream outputStream = socket.getOutputStream();
-
-      String html = "<html><head><title>HelloWorld</title></head><body><h1>My server</h1></body></html>";
-
-      final String CRLF = "\n\r"; //13, 10
-
-      String response =
-          "HTTP/1.1 200 OK" + CRLF +  //Status Line : HTML Version Respond_Code Respond_message
-          "Content-Length: " + html.getBytes().length + CRLF +
-            CRLF +
-            html +
-            CRLF + CRLF;
-
-      outputStream.write(response.getBytes());
-
-      inputStream.close();
-      outputStream.close();
-      socket.close();
-      serverSocket.close();
+      listenerThread = new ServerListenerThread(config.getPort(), config.getWebroot());
     } catch (IOException e) {
-      throw new RuntimeException(e);
+      e.printStackTrace();
     }
+    listenerThread.start();
   }
 }
