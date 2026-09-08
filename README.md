@@ -1,4 +1,3 @@
-# Counterfactual
-# Counterfactual
-# Counterfactual
-# Counterfactual
+# CD490 Code Project
+
+## Contributor: Bach Nguyen, Bikki Panthi
