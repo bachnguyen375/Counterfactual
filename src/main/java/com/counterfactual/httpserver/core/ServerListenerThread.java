@@ -23,31 +23,20 @@ public class ServerListenerThread extends Thread{
   @Override
   public void run(){
     try {
-      Socket socket = serverSocket.accept();
-      LOGGER.info("Client Accepted");
-
-      InputStream inputStream = socket.getInputStream();
-      OutputStream outputStream = socket.getOutputStream();
-
-      String html = "<html><head><title>HelloWorld</title></head><body><h1>My server</h1></body></html>";
-
-      final String CRLF = "\n\r"; //13, 10
-
-      String response =
-          "HTTP/1.1 200 OK" + CRLF +  //Status Line : HTML Version Respond_Code Respond_message
-              "Content-Length: " + html.getBytes().length + CRLF +
-              CRLF +
-              html +
-              CRLF + CRLF;
-
-      outputStream.write(response.getBytes());
-
-      inputStream.close();
-      outputStream.close();
-      socket.close();
-      serverSocket.close();
-    } catch (IOException e) {
-      throw new RuntimeException(e);
+      while (serverSocket.isBound() && !serverSocket.isClosed()) {
+        Socket socket = serverSocket.accept();
+        LOGGER.info("Client Accepted: " + socket.getInetAddress());
+        HTTPConnectionWorkerThread workerThread = new HTTPConnectionWorkerThread(socket);
+        workerThread.start();
+      }
+    } catch(IOException e){
+      LOGGER.error("Problem with server socket: ", e);
+    } finally{
+      if (serverSocket != null){
+        try {
+          serverSocket.close();
+        } catch (IOException e) {}
+      }
     }
   }
 }
