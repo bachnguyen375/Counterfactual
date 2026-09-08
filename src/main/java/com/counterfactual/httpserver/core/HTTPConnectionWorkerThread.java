@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,7 +21,17 @@ public class HTTPConnectionWorkerThread extends Thread{
       inputStream = socket.getInputStream();
       outputStream = socket.getOutputStream();
 
-      String html = "<html><head><title>HelloWorld</title></head><body><h1>My server</h1></body></html>";
+      InputStream htmlStream =
+          getClass().getClassLoader().getResourceAsStream("web/login.html");
+
+      if (htmlStream == null) {
+        throw new IOException("Could not find login.html");
+      }
+
+      String html = new String(
+          htmlStream.readAllBytes(),
+          StandardCharsets.UTF_8
+      );
 
       final String CRLF = "\n\r"; //13, 10
 
