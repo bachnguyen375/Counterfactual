@@ -38,7 +38,7 @@ public class HTTPConnectionWorkerThread extends Thread {
       );
 
       // Example:
-      // GET / HTTP/1.1
+      // GET /HTTP/1.1
       // POST /login HTTP/1.1
       String requestLine = reader.readLine();
 
@@ -134,10 +134,8 @@ public class HTTPConnectionWorkerThread extends Thread {
 
         return;
       }
-
       // Anything else
       send404(outputStream);
-
     } catch (IOException e) {
 
       LOGGER.error(

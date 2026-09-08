@@ -9,31 +9,27 @@ public class LoginHandler {
 
   private static final String USERNAME = "Bikki";
   private static final String PASSWORD = "ARABIA";
+  private static int attempts = 3;
 
   public static void handleLogin(
       String body,
       OutputStream outputStream
   ) throws IOException {
-
     String username = "";
     String password = "";
 
-    // Parse username=admin&password=1234
+    // Parse username&password
     String[] parameters = body.split("&");
-
     for (String parameter : parameters) {
 
       String[] pair = parameter.split("=", 2);
-
       if (pair.length != 2) {
         continue;
       }
-
       String key = URLDecoder.decode(
           pair[0],
           StandardCharsets.UTF_8
       );
-
       String value = URLDecoder.decode(
           pair[1],
           StandardCharsets.UTF_8
@@ -53,6 +49,12 @@ public class LoginHandler {
         && password.equals(PASSWORD)) {
 
       sendRedirect(outputStream, "/home");
+    }
+    else{
+      attempts -= 1;
+      if(attempts == 0){
+        sendRedirect(outputStream, "/fail");
+      }
     }
   }
 
