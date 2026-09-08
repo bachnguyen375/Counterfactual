@@ -55,6 +55,7 @@ public class LoginHandler {
       if(attempts == 0){
         sendRedirect(outputStream, "/fail");
       }
+      sendRedirect(outputStream, "/");
     }
   }
 

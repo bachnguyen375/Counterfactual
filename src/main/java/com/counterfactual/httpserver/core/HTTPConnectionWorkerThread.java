@@ -110,31 +110,36 @@ public class HTTPConnectionWorkerThread extends Thread {
       }
 
       // Login page
-      if (method.equals("GET")
-          && path.equals("/")) {
-
+      if (method.equals("GET") && path.equals("/")) {
         sendResource(
             outputStream,
             "web/login.html",
             "text/html; charset=UTF-8"
         );
-
         return;
       }
 
       // Home page
-      if (method.equals("GET")
-          && path.equals("/home")) {
-
+      if (method.equals("GET") && path.equals("/home")) {
         sendResource(
             outputStream,
             "web/home.html",
             "text/html; charset=UTF-8"
         );
-
         return;
       }
-      // Anything else
+      //Fail page
+      if (method.equals("GET") && path.equals("/fail")) {
+        sendResource(
+            outputStream,
+            "web/fail.html",
+            "text/html; charset=UTF-8"
+        );
+        socket.close();
+        return;
+      }
+
+      // Catch all 404
       send404(outputStream);
     } catch (IOException e) {
 
