@@ -7,7 +7,7 @@ import java.nio.charset.StandardCharsets;
 
 public class LoginHandler {
 
-  private static final String USERNAME = "Bikki";
+  private static final String USERNAME = "Altman";
   private static final String PASSWORD = "ARABIA";
   private static int attempts = 3;
 
