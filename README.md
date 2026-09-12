@@ -2,9 +2,9 @@
 
 ## Contributor: Bach Nguyen, Bikki Panthi
 
-This is the HTTP server component of **Project 1: Counterfactual**.
-The server is written in Java and provides a basic local HTTP server for serving web resources. 
-The server-side implementation is based on the [CodeFromScratch HTTP Server tutorial](https://github.com/CoderFromScratch/simple-java-http-server).
+### This is the HTTP server component of **Project 1: Counterfactual**.
+### The server is written in Java and provides a basic local HTTP server for serving web resources. 
+### The server-side implementation is based on the [CodeFromScratch HTTP Server tutorial](https://github.com/CoderFromScratch/simple-java-http-server).
 ---
 
 ## Features
@@ -86,7 +86,9 @@ For example:
 http://localhost:8080
 ```
 ### 4. Access Web Element
+```text
 HTML elements can be accessed and adjusted in the /resources/web folder
+```
 ---
 
 ## Technical Reference
